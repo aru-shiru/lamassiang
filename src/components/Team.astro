@@ -14,7 +14,11 @@ const people = [
   { photo: "/images/team/azzahra.png", name: "Az Zahra Nabillah Kamil, S.H." },
 ];
 
-const members = people.map((p, i) => ({ ...p, role: t.team.roles[i] }));
+const members = people.map((p, i) => ({
+  ...p,
+  role: t.team.roles[i],
+  bio: t.team.bios[i],
+}));
 ---
 
 <section class="section team" id="team">
@@ -33,7 +37,8 @@ const members = people.map((p, i) => ({ ...p, role: t.team.roles[i] }));
               <img src={m.photo} alt={`${t.team.photoAltPrefix} ${m.name}`} loading="lazy" />
             </div>
             <h3>{m.name}</h3>
-            <p>{m.role}</p>
+            <p class="team-role">{m.role}</p>
+            <p class="team-bio">{m.bio}</p>
           </article>
         ))
       }
@@ -69,7 +74,12 @@ const members = people.map((p, i) => ({ ...p, role: t.team.roles[i] }));
   .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 36px 28px;
+    gap: 48px 28px;
+  }
+
+  /* centre the lone last card when 7 members leave one on its own row */
+  .team-card:last-child:nth-child(3n + 1) {
+    grid-column: 2;
   }
 
   .team-card {
@@ -86,8 +96,9 @@ const members = people.map((p, i) => ({ ...p, role: t.team.roles[i] }));
 
   .team-photo img {
     width: 100%;
-    aspect-ratio: 1 / 1.1;
+    aspect-ratio: 1 / 1.05;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.4s ease;
   }
 
@@ -100,27 +111,31 @@ const members = people.map((p, i) => ({ ...p, role: t.team.roles[i] }));
     margin-bottom: 4px;
   }
 
-  .team-card p {
+  .team-role {
     color: var(--gold);
     font-size: 0.84rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    margin-bottom: 12px;
   }
 
-  .team-note {
-    margin-top: 48px;
-    text-align: center;
-    font-size: 0.85rem;
+  .team-bio {
     color: var(--ink-soft);
-    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.6;
   }
 
   @media (max-width: 900px) {
     .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .team-card:last-child:nth-child(3n + 1) { grid-column: auto; }
   }
 
   @media (max-width: 560px) {
-    .team-grid { grid-template-columns: 1fr; max-width: 340px; margin-inline: auto; }
+    .team-grid {
+      grid-template-columns: 1fr;
+      max-width: 340px;
+      margin-inline: auto;
+    }
   }
 </style>
