@@ -16,7 +16,7 @@ const translations = {
       team: "Our Lawyers",
       clients: "Clients",
       contact: "Contact",
-      cta: "Contact Us",
+      cta: "Free Consultation",
     },
     hero: {
       eyebrow: "Lamassiang & Co · Advocates & Counsellors at Law",
@@ -24,7 +24,7 @@ const translations = {
       titleEm: "reliable, efficient,",
       titlePost: "and effective",
       lead: "Backed by years of experience and a dedicated team of professionals, we are committed to delivering the finest legal services — designed around the specific needs of every client.",
-      ctaPrimary: "Contact Us",
+      ctaPrimary: "Free Consultation",
       ctaSecondary: "Explore Our Practice",
     },
     ceo: {
@@ -229,7 +229,7 @@ const translations = {
       team: "Para Advokat",
       clients: "Klien",
       contact: "Kontak",
-      cta: "Hubungi Kami",
+      cta: "Konsultasi Gratis",
     },
     hero: {
       eyebrow: "Lamassiang & Co · Advokat & Konsultan Hukum",
@@ -237,7 +237,7 @@ const translations = {
       titleEm: "andal, efisien,",
       titlePost: "dan efektif",
       lead: "Berbekal pengalaman bertahun-tahun dan tim profesional yang berdedikasi, kami berkomitmen untuk memberikan layanan hukum terbaik yang dirancang khusus untuk memenuhi kebutuhan hukum setiap klien.",
-      ctaPrimary: "Hubungi Kami",
+      ctaPrimary: "Konsultasi Gratis",
       ctaSecondary: "Lihat Bidang Praktik",
     },
     ceo: {
