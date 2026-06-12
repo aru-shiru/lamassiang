@@ -9,10 +9,10 @@ const t = useTranslations(lang);
   <div class="container ceo-grid reveal">
     <figure class="ceo-photo">
       <img
-        src="/images/team/walid.png"
+        src="/images/team/founder.jpg"
         alt={t.ceo.photoAlt}
         width="420"
-        height="420"
+        height="483"
         loading="lazy"
       />
       <figcaption>
@@ -52,11 +52,13 @@ const t = useTranslations(lang);
   }
 
   .ceo-photo img {
+    display: block;
     width: 100%;
     aspect-ratio: 1 / 1.15;
     object-fit: cover;
+    object-position: center top;
     border-radius: var(--radius);
-    box-shadow: 24px 24px 0 -8px var(--cream), 24px 24px 0 -7px var(--line);
+    box-shadow: 0 24px 48px rgba(20, 32, 44, 0.18);
   }
 
   .ceo-photo figcaption {

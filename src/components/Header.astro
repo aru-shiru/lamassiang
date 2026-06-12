@@ -1,5 +1,6 @@
 ---
 import { languages, useTranslations } from "../i18n/translations";
+import Logo from "./Logo.astro";
 
 const { lang = "en" } = Astro.props;
 const t = useTranslations(lang);
@@ -15,7 +16,7 @@ const links = [
 <header class="site-header" id="site-header">
   <div class="container header-inner">
     <a href="#top" class="brand">
-      <span class="brand-mark">L&amp;Co</span>
+      <span class="brand-mark"><Logo class="brand-logo" /></span>
       <span class="brand-text">
         <strong>Lamassiang</strong>
         <small>&amp; Co</small>
@@ -127,10 +128,12 @@ const links = [
     border-radius: 12px;
     background: var(--gold);
     color: #fff;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 0.01em;
+    color: #fff;
+  }
+
+  .brand-logo {
+    width: 70%;
+    height: auto;
   }
 
   .brand-text {

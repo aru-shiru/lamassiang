@@ -1,0 +1,18 @@
+<svg viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lamassiang &amp; Co Law Firm">
+  <g stroke="#14202c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- balance beam -->
+    <path d="M16 12 Q32 9 48 12" />
+    <!-- left pan: triangle of strings + plate -->
+    <path d="M16 12 L4 34 M16 12 L28 34 M16 12 L16 34 M4 34 H28" />
+    <!-- right pan: triangle of strings + plate -->
+    <path d="M48 12 L36 34 M48 12 L60 34 M48 12 L48 34 M36 34 H60" />
+  </g>
+  <g fill="#14202c">
+    <!-- central pivot -->
+    <path d="M32 5 L35 10 L32 15 L29 10 Z" />
+    <!-- left bowl -->
+    <path d="M6 34 H26 A10 8 0 0 1 6 34 Z" />
+    <!-- right bowl -->
+    <path d="M38 34 H58 A10 8 0 0 1 38 34 Z" />
+  </g>
+</svg>

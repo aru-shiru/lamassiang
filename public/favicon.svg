@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#1c2b3a"/>
-  <text x="32" y="42" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="26" fill="#b9924f">L&amp;P</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Lamassiang &amp; Co">
+  <rect width="64" height="64" rx="14" fill="#b9924f"/>
+  <g transform="translate(8.96 16) scale(0.72)" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 12 Q32 9 48 12"/>
+    <path d="M16 12 L4 34 M16 12 L28 34 M16 12 L16 34 M4 34 H28"/>
+    <path d="M48 12 L36 34 M48 12 L60 34 M48 12 L48 34 M36 34 H60"/>
+  </g>
+  <g transform="translate(8.96 16) scale(0.72)" fill="#ffffff">
+    <path d="M32 5 L35 10 L32 15 L29 10 Z"/>
+    <path d="M6 34 H26 A10 8 0 0 1 6 34 Z"/>
+    <path d="M38 34 H58 A10 8 0 0 1 38 34 Z"/>
+  </g>
 </svg>
