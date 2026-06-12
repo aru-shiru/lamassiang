@@ -15,10 +15,10 @@ const links = [
 <header class="site-header" id="site-header">
   <div class="container header-inner">
     <a href="#top" class="brand">
-      <span class="brand-mark">L&amp;P</span>
+      <span class="brand-mark">L&amp;Co</span>
       <span class="brand-text">
         <strong>Lamassiang</strong>
-        <small>&amp; Partners</small>
+        <small>&amp; Co</small>
       </span>
     </a>
 
@@ -67,13 +67,24 @@ const links = [
     })
   );
 
-  // Keep the current section in view when switching language
-  document.querySelectorAll("[data-lang-link]").forEach((a) =>
-    a.addEventListener("click", (e) => {
-      if (location.hash) {
-        e.preventDefault();
-        location.href = (a as HTMLAnchorElement).href + location.hash;
+  // Keep the section currently in view when switching language.
+  // We detect it from the live scroll position rather than location.hash,
+  // which can be stale (it lingers after you scroll away from a section).
+  const sectionIds = ["top", "about", "practice", "team", "contact"];
+
+  document.querySelectorAll("[data-lang-link]").forEach((link) =>
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (link.classList.contains("active")) return;
+
+      let current = "";
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 100) current = id;
       }
+
+      const base = (link as HTMLAnchorElement).href.split("#")[0];
+      location.href = current && current !== "top" ? `${base}#${current}` : base;
     })
   );
 </script>
@@ -118,8 +129,8 @@ const links = [
     color: #fff;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
   }
 
   .brand-text {

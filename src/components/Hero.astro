@@ -19,16 +19,6 @@ const t = useTranslations(lang);
       <a href="#contact" class="btn btn-gold">{t.hero.ctaPrimary}</a>
       <a href="#practice" class="btn btn-ghost">{t.hero.ctaSecondary}</a>
     </div>
-    <ul class="hero-stats">
-      {
-        t.hero.stats.map((stat) => (
-          <li>
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
-          </li>
-        ))
-      }
-    </ul>
   </div>
 </section>
 

@@ -5,12 +5,13 @@ const { lang = "en" } = Astro.props;
 const t = useTranslations(lang);
 
 const people = [
-  { photo: "/images/team/person-2.jpg", name: "Siti Rahmadani, S.H., LL.M." },
-  { photo: "/images/team/person-3.jpg", name: "Bharata Wijaya, S.H., M.H." },
-  { photo: "/images/team/person-4.jpg", name: "Maria Tandiari, S.H." },
-  { photo: "/images/team/person-5.jpg", name: "Daniel Pasaribu, S.H., M.Kn." },
-  { photo: "/images/team/person-6.jpg", name: "Nurul Fadhilah, S.H." },
-  { photo: "/images/team/person-7.jpg", name: "Reza Mahendra, S.H., LL.M." },
+  { photo: "/images/team/walid.png", name: "Muhammad Walid T, S.H." },
+  { photo: "/images/team/hidayatullah.png", name: "Hidayatullah, S.H." },
+  { photo: "/images/team/afrisya.png", name: "Muhammad Afrisya Hasyim, S.H." },
+  { photo: "/images/team/imam.png", name: "Imam Ahmad, S.H." },
+  { photo: "/images/team/tanrasula.png", name: "A. Tanrasula, S.H." },
+  { photo: "/images/team/pangeran.png", name: "Pangeran Alfayed Ruslan, S.H." },
+  { photo: "/images/team/azzahra.png", name: "Az Zahra Nabillah Kamil, S.H." },
 ];
 
 const members = people.map((p, i) => ({ ...p, role: t.team.roles[i] }));
@@ -37,8 +38,6 @@ const members = people.map((p, i) => ({ ...p, role: t.team.roles[i] }));
         ))
       }
     </div>
-
-    <p class="team-note reveal">{t.team.note}</p>
   </div>
 </section>
 
