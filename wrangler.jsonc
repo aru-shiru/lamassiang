@@ -1,0 +1,9 @@
+{
+  // Deploy the Astro static build (./dist) as a Cloudflare Worker that
+  // only serves static assets — no server-side code needed.
+  "name": "lamassiang",
+  "compatibility_date": "2026-06-12",
+  "assets": {
+    "directory": "./dist"
+  }
+}
