@@ -68,11 +68,16 @@ const areas = t.practice.areas.map((area, i) => ({ ...area, icon: icons[i] }));
 
 <style>
   .practice-head {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: end;
+    max-width: 540px;
     margin-bottom: 56px;
+  }
+
+  .practice-head .section-lead {
+    margin-top: 18px;
+  }
+
+  @media (max-width: 720px) {
+    .practice-head { max-width: none; }
   }
 
   .practice-grid {
@@ -125,7 +130,6 @@ const areas = t.practice.areas.map((area, i) => ({ ...area, icon: icons[i] }));
   }
 
   @media (max-width: 720px) {
-    .practice-head { grid-template-columns: 1fr; gap: 16px; }
     .practice-grid { grid-template-columns: 1fr; }
   }
 </style>

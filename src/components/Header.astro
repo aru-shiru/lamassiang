@@ -7,9 +7,9 @@ const t = useTranslations(lang);
 
 const links = [
   { href: "#about", label: t.nav.about },
+  { href: "#clients", label: t.nav.clients },
   { href: "#practice", label: t.nav.practice },
   { href: "#team", label: t.nav.team },
-  { href: "#contact", label: t.nav.contact },
 ];
 ---
 
@@ -71,7 +71,7 @@ const links = [
   // Keep the section currently in view when switching language.
   // We detect it from the live scroll position rather than location.hash,
   // which can be stale (it lingers after you scroll away from a section).
-  const sectionIds = ["top", "about", "practice", "team", "contact"];
+  const sectionIds = ["top", "about", "clients", "practice", "team", "contact"];
 
   document.querySelectorAll("[data-lang-link]").forEach((link) =>
     link.addEventListener("click", (e) => {

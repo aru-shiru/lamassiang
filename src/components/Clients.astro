@@ -1,0 +1,96 @@
+---
+import { useTranslations } from "../i18n/translations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="section clients" id="clients">
+  <div class="container">
+    <div class="clients-head reveal">
+      <p class="eyebrow">{t.clients.eyebrow}</p>
+      <h2 class="section-title">{t.clients.title}</h2>
+      <p class="section-lead">{t.clients.lead}</p>
+    </div>
+
+    <div class="clients-grid reveal">
+      {
+        t.clients.names.map((name) => (
+          <div class="client">
+            <span>{name}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .clients-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .clients-head .eyebrow {
+    justify-content: center;
+    color: var(--gold-soft);
+  }
+
+  .clients-head .section-title {
+    color: #fff;
+  }
+
+  .clients-head .section-lead {
+    color: rgba(255, 255, 255, 0.72);
+    margin-inline: auto;
+  }
+
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+
+  .client {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    min-height: 96px;
+    padding: 24px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .client span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.4;
+  }
+
+  .client:hover {
+    border-color: var(--gold);
+    background: rgba(185, 146, 79, 0.1);
+  }
+
+  .client:hover span {
+    color: var(--gold-soft);
+  }
+
+  @media (max-width: 900px) {
+    .clients-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .clients-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

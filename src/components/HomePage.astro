@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "./Header.astro";
 import Hero from "./Hero.astro";
 import CeoGreeting from "./CeoGreeting.astro";
+import Clients from "./Clients.astro";
 import PracticeAreas from "./PracticeAreas.astro";
 import WhyUs from "./WhyUs.astro";
 import Team from "./Team.astro";
@@ -17,6 +18,7 @@ const { lang = "en" } = Astro.props;
   <main>
     <Hero lang={lang} />
     <CeoGreeting lang={lang} />
+    <Clients lang={lang} />
     <PracticeAreas lang={lang} />
     <WhyUs lang={lang} />
     <Team lang={lang} />
