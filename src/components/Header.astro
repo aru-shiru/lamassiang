@@ -1,0 +1,242 @@
+---
+import { languages, useTranslations } from "../i18n/translations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+
+const links = [
+  { href: "#about", label: t.nav.about },
+  { href: "#practice", label: t.nav.practice },
+  { href: "#team", label: t.nav.team },
+  { href: "#contact", label: t.nav.contact },
+];
+---
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">L&amp;P</span>
+      <span class="brand-text">
+        <strong>Lamassiang</strong>
+        <small>&amp; Partners</small>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <div class="lang-switch" id="lang-switch">
+      {
+        Object.entries(languages).map(([code, l]) => (
+          <a href={l.url} class:list={[{ active: code === lang }]} data-lang-link>
+            {l.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <a href="#contact" class="btn btn-gold header-cta">{t.nav.cta}</a>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header")!;
+  const toggle = document.getElementById("menu-toggle")!;
+  const nav = document.getElementById("nav")!;
+
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 24);
+  });
+
+  toggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.classList.toggle("open", open);
+  });
+
+  nav.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      nav.classList.remove("open");
+      toggle.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    })
+  );
+
+  // Keep the current section in view when switching language
+  document.querySelectorAll("[data-lang-link]").forEach((a) =>
+    a.addEventListener("click", (e) => {
+      if (location.hash) {
+        e.preventDefault();
+        location.href = (a as HTMLAnchorElement).href + location.hash;
+      }
+    })
+  );
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    padding: 18px 0;
+    transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  }
+
+  .site-header.scrolled {
+    background: rgba(20, 32, 44, 0.96);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    padding: 12px 0;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-right: auto;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--gold);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  .brand-text strong {
+    font-family: var(--font-display);
+    font-size: 1.18rem;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-text small {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  .nav {
+    display: flex;
+    gap: 30px;
+  }
+
+  .nav a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav a:hover {
+    color: var(--gold-soft);
+  }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .lang-switch a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .lang-switch a:hover {
+    color: #fff;
+  }
+
+  .lang-switch a.active {
+    background: var(--gold);
+    color: #fff;
+  }
+
+  .header-cta {
+    padding: 11px 24px;
+    font-size: 0.88rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+
+  .menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 860px) {
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--navy-deep);
+      padding: 8px 0;
+      display: none;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav.open { display: flex; }
+
+    .nav a {
+      padding: 14px 6vw;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header-cta { display: none; }
+    .menu-toggle { display: flex; }
+  }
+</style>

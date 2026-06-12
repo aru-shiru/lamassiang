@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import CeoGreeting from "./CeoGreeting.astro";
+import PracticeAreas from "./PracticeAreas.astro";
+import WhyUs from "./WhyUs.astro";
+import Team from "./Team.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+
+const { lang = "en" } = Astro.props;
+---
+
+<Layout lang={lang}>
+  <Header lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <CeoGreeting lang={lang} />
+    <PracticeAreas lang={lang} />
+    <WhyUs lang={lang} />
+    <Team lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>

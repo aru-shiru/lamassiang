@@ -1,0 +1,169 @@
+---
+import { useTranslations } from "../i18n/translations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+
+const exploreHrefs = ["#about", "#practice", "#team", "#contact"];
+---
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="brand">
+        <span class="brand-mark">L&amp;P</span>
+        <span class="brand-text">
+          <strong>Lamassiang</strong>
+          <small>&amp; Partners</small>
+        </span>
+      </a>
+      <p>{t.footer.tagline}</p>
+    </div>
+
+    <nav class="footer-col" aria-label="Site">
+      <h4>{t.footer.explore}</h4>
+      {t.footer.exploreLinks.map((label, i) => <a href={exploreHrefs[i]}>{label}</a>)}
+    </nav>
+
+    <nav class="footer-col" aria-label="Practice areas">
+      <h4>{t.footer.practiceTitle}</h4>
+      {t.footer.practiceLinks.map((label) => <a href="#practice">{label}</a>)}
+    </nav>
+
+    <div class="footer-col">
+      <h4>{t.footer.office}</h4>
+      <p>
+        Jl. Jenderal Sudirman Kav. 21<br />
+        Jakarta Selatan 12920<br />
+        <a href="https://wa.me/6285775092242" target="_blank" rel="noopener" class="footer-wa">
+          +62 857-7509-2242 (WhatsApp)
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} Lamassiang &amp; Partners. {t.footer.rights}</p>
+    <p>{t.footer.disclaimer}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--navy-deep);
+    color: rgba(255, 255, 255, 0.78);
+    padding: 72px 0 0;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 18px;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--gold);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  .brand-text strong {
+    font-family: var(--font-display);
+    font-size: 1.18rem;
+  }
+
+  .brand-text small {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  .footer-brand p {
+    font-size: 0.92rem;
+    max-width: 34ch;
+  }
+
+  .footer-col h4 {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+
+  .footer-col a {
+    display: block;
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--gold-soft);
+  }
+
+  .footer-col p {
+    font-size: 0.92rem;
+    line-height: 1.9;
+  }
+
+  .footer-wa {
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-wa:hover {
+    color: var(--gold-soft);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 22px;
+    padding-bottom: 26px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+</style>

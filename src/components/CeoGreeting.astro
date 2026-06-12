@@ -1,0 +1,130 @@
+---
+import { useTranslations } from "../i18n/translations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="section ceo" id="about">
+  <div class="container ceo-grid reveal">
+    <figure class="ceo-photo">
+      <img
+        src="/images/team/person-1.jpg"
+        alt={t.ceo.photoAlt}
+        width="420"
+        height="420"
+        loading="lazy"
+      />
+      <figcaption>
+        <strong>{t.ceo.name}</strong>
+        <span>{t.ceo.role}</span>
+      </figcaption>
+    </figure>
+
+    <div class="ceo-message">
+      <p class="eyebrow">{t.ceo.eyebrow}</p>
+      <h2 class="section-title">{t.ceo.title}</h2>
+      <blockquote>{t.ceo.quote}</blockquote>
+      <p>{t.ceo.p1}</p>
+      <p>{t.ceo.p2}</p>
+      <div class="signature">
+        <span class="signature-name">{t.ceo.signatureName}</span>
+        <span class="signature-role">{t.ceo.role}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ceo {
+    background: var(--paper);
+  }
+
+  .ceo-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  .ceo-photo {
+    position: relative;
+  }
+
+  .ceo-photo img {
+    width: 100%;
+    aspect-ratio: 1 / 1.15;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: 24px 24px 0 -8px var(--cream), 24px 24px 0 -7px var(--line);
+  }
+
+  .ceo-photo figcaption {
+    position: absolute;
+    left: 20px;
+    bottom: -26px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 12px;
+    padding: 14px 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 16px 32px rgba(20, 32, 44, 0.25);
+  }
+
+  .ceo-photo figcaption strong {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+  }
+
+  .ceo-photo figcaption span {
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  blockquote {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--navy);
+    margin: 8px 0 18px;
+  }
+
+  .ceo-message p:not(.eyebrow) {
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  .signature {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signature-name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--gold);
+  }
+
+  .signature-role {
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .ceo-grid {
+      grid-template-columns: 1fr;
+      gap: 64px;
+    }
+
+    .ceo-photo {
+      max-width: 380px;
+    }
+  }
+</style>

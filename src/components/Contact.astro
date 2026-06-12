@@ -1,0 +1,204 @@
+---
+import { useTranslations } from "../i18n/translations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+const f = t.contact.form;
+
+const WA_NUMBER = "6285775092242";
+const waDirectUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(f.waGreeting)}`;
+---
+
+<section class="section contact" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <p class="eyebrow">{t.contact.eyebrow}</p>
+      <h2 class="section-title">{t.contact.title}</h2>
+      <p class="section-lead">{t.contact.lead}</p>
+
+      <a href={waDirectUrl} class="btn btn-wa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M12.04 2c-5.46 0-9.9 4.43-9.9 9.88 0 1.74.46 3.44 1.32 4.94L2 22l5.32-1.4a9.9 9.9 0 0 0 4.72 1.2h.01c5.45 0 9.89-4.43 9.89-9.88 0-2.64-1.03-5.12-2.9-6.99A9.83 9.83 0 0 0 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.73-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.39 1.01 2.56.13.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z"
+          ></path>
+        </svg>
+        {t.contact.whatsappCta}
+      </a>
+
+      <dl class="contact-details">
+        {
+          t.contact.details.map((d) => (
+            <div class="contact-item">
+              <dt>{d.label}</dt>
+              <dd>
+                {d.lines.map((line) => (
+                  <span>{line}</span>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <form class="contact-form reveal" id="wa-form" data-number={WA_NUMBER} data-greeting={f.waGreeting}>
+      <label>
+        {f.name}
+        <input type="text" name="name" placeholder={f.namePlaceholder} required />
+      </label>
+      <label>
+        {f.topic}
+        <select name="topic">
+          {f.topics.map((topic) => <option>{topic}</option>)}
+        </select>
+      </label>
+      <label>
+        {f.message}
+        <textarea name="message" rows="4" placeholder={f.messagePlaceholder}></textarea>
+      </label>
+      <button type="submit" class="btn btn-gold form-submit">{f.submit}</button>
+      <p class="form-privacy">{f.privacy}</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("wa-form") as HTMLFormElement;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const fieldLabels = Array.from(form.querySelectorAll("label")).map(
+      (l) => l.childNodes[0].textContent?.trim() ?? ""
+    );
+    const fields = ["name", "topic", "message"];
+    const lines = [form.dataset.greeting ?? "", ""];
+    fields.forEach((field, i) => {
+      const value = String(data.get(field) ?? "").trim();
+      if (value) lines.push(`${fieldLabels[i]}: ${value}`);
+    });
+    const url = `https://wa.me/${form.dataset.number}?text=${encodeURIComponent(lines.join("\n"))}`;
+    window.open(url, "_blank", "noopener");
+  });
+</script>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  .btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25d366;
+    color: #fff;
+    margin-top: 28px;
+    box-shadow: 0 10px 24px rgba(37, 211, 102, 0.3);
+  }
+
+  .btn-wa:hover {
+    background: #1fb858;
+  }
+
+  .btn-wa svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-details {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .contact-item dt {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .contact-item dd {
+    display: flex;
+    flex-direction: column;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+  }
+
+  .contact-form {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: 0 24px 60px rgba(28, 43, 58, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.03em;
+  }
+
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 13px 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(185, 146, 79, 0.18);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .form-submit {
+    border: none;
+    cursor: pointer;
+    margin-top: 6px;
+    font-family: var(--font-body);
+  }
+
+  .form-privacy {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .contact-form { padding: 28px 22px; }
+  }
+</style>

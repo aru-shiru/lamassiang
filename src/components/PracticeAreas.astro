@@ -1,0 +1,117 @@
+---
+import { useTranslations } from "../i18n/translations";
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+
+const icons = [
+  "M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01",
+  "M12 3v18M5 7l7-4 7 4M5 7v3a4 4 0 0 0 8 0M11 7v3a4 4 0 0 0 8 0M5 7h14M8 21h8",
+  "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+  "M3 21h18M9 8h6M9 12h6M9 16h6M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16",
+  "M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2",
+  "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+];
+
+const areas = t.practice.areas.map((area, i) => ({ ...area, icon: icons[i] }));
+---
+
+<section class="section practice" id="practice">
+  <div class="container">
+    <div class="practice-head reveal">
+      <div>
+        <p class="eyebrow">{t.practice.eyebrow}</p>
+        <h2 class="section-title">{t.practice.title}</h2>
+      </div>
+      <p class="section-lead">{t.practice.lead}</p>
+    </div>
+
+    <div class="practice-grid">
+      {
+        areas.map((area, i) => (
+          <article class="practice-card reveal" style={`transition-delay: ${(i % 3) * 0.08}s`}>
+            <span class="practice-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={area.icon} />
+              </svg>
+            </span>
+            <h3>{area.title}</h3>
+            <p>{area.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .practice-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 56px;
+  }
+
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .practice-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 30px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.7s ease;
+  }
+
+  .practice-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px rgba(28, 43, 58, 0.1);
+  }
+
+  .practice-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: rgba(185, 146, 79, 0.12);
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+
+  .practice-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .practice-card h3 {
+    font-size: 1.22rem;
+    margin-bottom: 10px;
+  }
+
+  .practice-card p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 980px) {
+    .practice-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 720px) {
+    .practice-head { grid-template-columns: 1fr; gap: 16px; }
+    .practice-grid { grid-template-columns: 1fr; }
+  }
+</style>
