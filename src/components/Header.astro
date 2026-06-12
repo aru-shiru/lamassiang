@@ -25,6 +25,7 @@ const links = [
 
     <nav class="nav" id="nav">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      <a href="#contact" class="nav-cta btn btn-gold">{t.nav.cta}</a>
     </nav>
 
     <div class="lang-switch" id="lang-switch">
@@ -54,18 +55,21 @@ const links = [
     header.classList.toggle("scrolled", window.scrollY > 24);
   });
 
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", String(open));
+  const setMenu = (open: boolean) => {
+    nav.classList.toggle("open", open);
     toggle.classList.toggle("open", open);
-  });
+    toggle.setAttribute("aria-expanded", String(open));
+    document.body.classList.toggle("nav-locked", open);
+    // Drop the scrolled header's backdrop-filter while open: a backdrop-filter
+    // turns the header into the containing block for the fixed overlay, which
+    // would otherwise clip it to the header's height.
+    header.classList.toggle("nav-open", open);
+  };
+
+  toggle.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
 
   nav.querySelectorAll("a").forEach((a) =>
-    a.addEventListener("click", () => {
-      nav.classList.remove("open");
-      toggle.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    })
+    a.addEventListener("click", () => setMenu(false))
   );
 
   // Keep the section currently in view when switching language.
@@ -104,6 +108,14 @@ const links = [
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
     padding: 12px 0;
+  }
+
+  /* While the full-screen menu is open, drop the backdrop-filter so the
+     fixed overlay sizes to the viewport rather than the header box. */
+  .site-header.nav-open {
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
   }
 
   .header-inner {
@@ -173,6 +185,11 @@ const links = [
     color: var(--gold-soft);
   }
 
+  /* Mobile-only call to action inside the full-screen menu */
+  .nav-cta {
+    display: none;
+  }
+
   .lang-switch {
     display: flex;
     align-items: center;
@@ -229,28 +246,53 @@ const links = [
   .menu-toggle.open span:nth-child(2) { opacity: 0; }
   .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+  :global(body.nav-locked) {
+    overflow: hidden;
+  }
+
   @media (max-width: 860px) {
     .nav {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
       flex-direction: column;
-      gap: 0;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
       background: var(--navy-deep);
-      padding: 8px 0;
+      padding: 96px 24px 56px;
       display: none;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
-    .nav.open { display: flex; }
+    .nav.open {
+      display: flex;
+    }
 
     .nav a {
-      padding: 14px 6vw;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 16px;
+    }
+
+    .nav .nav-cta {
+      display: inline-block;
+      margin-top: 22px;
+      font-size: 1rem;
+      padding: 14px 36px;
+    }
+
+    /* keep logo + language switch above the overlay */
+    .brand,
+    .lang-switch {
+      position: relative;
+      z-index: 110;
     }
 
     .header-cta { display: none; }
-    .menu-toggle { display: flex; }
+    .menu-toggle {
+      display: flex;
+      position: relative;
+      z-index: 110;
+    }
   }
 </style>
