@@ -163,7 +163,7 @@ const translations = {
         },
         {
           label: "WhatsApp Us",
-          lines: ["+62 852-1609-3554", "Fastest way to reach us"],
+          lines: ["+62 857-7509-2242", "Fastest way to reach us"],
         },
         {
           label: "Email",
@@ -374,7 +374,7 @@ const translations = {
         },
         {
           label: "WhatsApp Kami",
-          lines: ["+62 852-1609-3554", "Cara tercepat menghubungi kami"],
+          lines: ["+62 857-7509-2242", "Cara tercepat menghubungi kami"],
         },
         {
           label: "Email",
